@@ -1,1 +1,1 @@
-export { WorkerDelegator } from './worker-delegator';
+export { WorkerThreadDelegator } from './worker-thread-delegator';
