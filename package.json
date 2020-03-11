@@ -1,6 +1,6 @@
 {
   "name": "worker-delegator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A lib to delegate tasks for workers on a controlled way",
   "main": "dist/index.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "prebuild": "run-pre-build",
     "build": "run-build",
     "test:coverage": "run-test-coverage",
-		"test:coverage:lcovonly": "run-test-lcov",
-		"prepublish": "npm run build"
+    "test:coverage:lcovonly": "run-test-lcov",
+    "prepublish": "npm run build"
   },
   "author": "Farenheith",
   "license": "MIT",
