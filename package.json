@@ -9,7 +9,8 @@
     "prebuild": "run-pre-build",
     "build": "run-build",
     "test:coverage": "run-test-coverage",
-    "test:coverage:lcovonly": "run-test-lcov"
+		"test:coverage:lcovonly": "run-test-lcov",
+		"prepublish": "npm run build"
   },
   "author": "Farenheith",
   "license": "MIT",
