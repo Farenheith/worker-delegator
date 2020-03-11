@@ -21,5 +21,19 @@
   "dependencies": {
     "delay": "^4.3.0",
     "tsee": "^1.3.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Farenheith/worker-delegator.git"
+  },
+  "keywords": [
+    "worker_thread"
+  ],
+  "bugs": {
+    "url": "https://github.com/Farenheith/worker-delegator/issues"
+  },
+  "homepage": "https://github.com/Farenheith/worker-delegator#readme"
 }
