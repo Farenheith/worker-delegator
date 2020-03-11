@@ -8,6 +8,8 @@ First, you get a instance of the delegator
 
 ```TypeScript
 const delegator = new WorkerDelegator(10, './build/my-delegated-source.js');
+
+delegator.initialize();
 ```
 
 We defined here a delegator that controls 10 workers that runs my-delegated-source.js.
