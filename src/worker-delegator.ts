@@ -22,7 +22,7 @@ export class WorkerDelegator<WorkerMessage> extends EventEmitter<WorkerEvents> {
   constructor(
 		private readonly concurrency: number,
 		private readonly workerCode: string,
-		private readonly workerOptions: WorkerOptions,
+		private readonly workerOptions: WorkerOptions = {},
 		private readonly rebornDelay: number = RELOAD_DELAY,
   ) {
 		super();
