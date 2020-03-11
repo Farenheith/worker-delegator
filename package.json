@@ -1,0 +1,24 @@
+{
+  "name": "worker-delegator",
+  "version": "0.0.0",
+  "description": "A lib to delegate tasks for workers on a controlled way",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "run-test",
+    "lint": "run-lint",
+    "prebuild": "run-pre-build",
+    "build": "run-build",
+    "test:coverage": "run-test-coverage",
+    "test:coverage:lcovonly": "run-test-lcov"
+  },
+  "author": "Farenheith",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/delay": "^3.1.0",
+    "base-project-config": "^1.2.7"
+  },
+  "dependencies": {
+    "delay": "^4.3.0",
+    "tsee": "^1.3.0"
+  }
+}
