@@ -7,7 +7,7 @@ This is a simple project to help delegate tasks for worker threads in a controle
 First, you get a instance of the delegator
 
 ```TypeScript
-const delegator = new WorkerDelegator(10, './build/my-delegated-source.js');
+const delegator = new WorkerThreadDelegator(10, './build/my-delegated-source.js');
 
 delegator.initialize();
 ```
@@ -38,3 +38,22 @@ await delegator.delegate('my-message');
 That's it!
 
 The promise returned by delegate will resolve after the message is delegated, not when it is processed. That's how the delegation pace is controlled! awaiting this call, you can control the flow of your solution to wait a little in a processing, for example, when all the workers are busy!
+
+# Promise version
+
+You can also run a Promise version of this delegator, with the following code:
+```TypeScript
+const delegator = new WorkerTaskDelegator(10, './build/my-delegated-source.js');
+
+delegator.initialize();
+```
+
+The usability is the same, the only difference is that all control are made based on promises, not worker threads.
+
+If you don't want to use --experimental-worker parameter when running node if you're using only this option. Just import directly this worker, like this:
+
+```TypeScript
+import { WorkerTaskDelegator } from 'worker-delegator/worker-task-delegator';
+```
+
+With it you avoid the importion of worker-threads module at all.
