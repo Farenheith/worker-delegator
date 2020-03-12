@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/Farenheith/worker-delegator.svg?branch=master)](https://travis-ci.com/Farenheith/worker-delegator)
 [![codecov](https://codecov.io/gh/Farenheith/worker-delegator/branch/master/graph/badge.svg)](https://codecov.io/gh/Farenheith/worker-delegator)
-[![Maintainability](https://api.codeclimate.com/v1/badges/765901ef4f0f52b07647/maintainability)](https://codeclimate.com/github/Farenheith/worker-delegator/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d60f70425ca98939aacf/maintainability)](https://codeclimate.com/github/Farenheith/worker-delegator/maintainability)
 [![Packages](https://david-dm.org/Farenheith/worker-delegator.svg)](https://david-dm.org/Farenheith/worker-delegator)
 [![npm version](https://badge.fury.io/js/worker-delegator.svg)](https://badge.fury.io/js/worker-delegator)
 
