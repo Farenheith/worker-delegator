@@ -15,11 +15,11 @@
   "author": "Farenheith",
   "license": "MIT",
   "devDependencies": {
-    "@types/delay": "^3.1.0",
-    "strict-unit-tests": "^2.0.0"
+    "@types/delay": "^3.1.0"
   },
   "dependencies": {
     "delay": "^4.3.0",
+    "strict-unit-tests": "^2.0.1",
     "tsee": "^1.3.0"
   },
   "directories": {
