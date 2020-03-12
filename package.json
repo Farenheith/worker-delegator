@@ -16,7 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/delay": "^3.1.0",
-    "base-project-config": "^1.2.7"
+    "strict-unit-tests": "^2.0.0"
   },
   "dependencies": {
     "delay": "^4.3.0",
