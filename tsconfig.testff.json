@@ -1,0 +1,6 @@
+{
+	"extends": "base-project-config/tsconfig.test.json",
+	"compilerOptions": {
+		"types": ["strict-unit-tests"]
+	}
+}
