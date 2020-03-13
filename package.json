@@ -15,7 +15,6 @@
   "author": "Farenheith",
   "license": "MIT",
   "devDependencies": {
-    "@types/delay": "^3.1.0",
     "strict-unit-tests": "^2.0.8"
   },
   "dependencies": {
