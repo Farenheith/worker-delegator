@@ -62,8 +62,8 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
     };
 	}
 
-  protected getOnMessage(workerControl: WorkerControl<Worker>, index: number) {
-    return async <TMessage>(message: TMessage) => {
+  protected getOnMessage(workerControl: WorkerControl<Worker>) {
+    return <TMessage>(message: TMessage) => {
       workerControl.working = false;
 			this.emit('message', message);
     };

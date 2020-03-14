@@ -15,11 +15,11 @@ export class WorkerTaskDelegator<WorkerMessage> extends WorkerDelegator<Worker<W
 	}
 
 	protected newWorkerInstance(workerIndex: number, workerControl: WorkerControl<Worker<WorkerMessage>>) {
-		const onMessage = this.getOnMessage(workerControl, workerIndex);
+		const onMessage = this.getOnMessage(workerControl);
 
 		return async (message: WorkerMessage) => {
 			const result = await this.workerCode(message, workerIndex);
-			await onMessage(result);
+			onMessage(result);
 		};
 	}
 
