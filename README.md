@@ -10,6 +10,9 @@ This is a simple project to help delegate tasks for worker threads in a controle
 
 # How it works?
 
+### IMPORTANT:
+To use this option and you're using node 10, you need to run node with the option *--experimental-worker*, or this'll not work!
+
 First, you get a instance of the delegator
 
 ```TypeScript
@@ -56,7 +59,7 @@ delegator.initialize();
 
 The usability is the same, the only difference is that all control are made based on promises, not worker threads.
 
-If you don't want to use --experimental-worker parameter when running node if you're using only this option. Just import directly this worker, like this:
+If you're using node 10 and you don't want to use --experimental-worker parameter when running node if you're using only this option. Just import directly this worker, like this:
 
 ```TypeScript
 import { WorkerTaskDelegator } from 'worker-delegator/worker-task-delegator';
