@@ -4,10 +4,10 @@
   "description": "A lib to delegate tasks for workers on a controlled way",
   "main": "build/index.js",
   "scripts": {
-    "test": "run-test",
+    "test": "run-test --experimental-workers",
     "lint": "run-lint",
     "prebuild": "run-pre-build",
-    "build": "run-build",
+    "build": "run-build --experimental-workers",
     "test:coverage": "run-test-coverage",
     "test:coverage:lcovonly": "run-test-lcov",
     "prepublish": "npm run build"
