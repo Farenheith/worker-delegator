@@ -7,7 +7,7 @@
     "test": "run-test --experimental-workers",
     "lint": "run-lint",
     "prebuild": "run-pre-build",
-    "build": "run-build --experimental-workers",
+    "build": "run-build",
     "test:coverage": "run-test-coverage",
     "test:coverage:lcovonly": "run-test-lcov",
     "prepublish": "npm run build"
