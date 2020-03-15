@@ -10,6 +10,8 @@ This is a simple project to help delegate tasks for worker threads in a controle
 
 # How it works?
 
+# Worker thread version
+
 ### IMPORTANT:
 To use this option and you're using node 10, you need to run node with the option *--experimental-worker*, or this'll not work!
 
@@ -52,7 +54,10 @@ The promise returned by delegate will resolve after the message is delegated, no
 
 You can also run a Promise version of this delegator, with the following code:
 ```TypeScript
-const delegator = new WorkerTaskDelegator(10, './build/my-delegated-source.js');
+const delegator = new WorkerTaskDelegator(10, async () => {
+    console.log('my promised code');
+    return 'result';
+});
 
 delegator.initialize();
 ```
