@@ -34,12 +34,22 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
     let idleWorker = this.workers.find((x) => !x.working);
 
     while (!idleWorker) {
-      await new Promise((resolve) => this.once('message', resolve));
+      await this.waitSomeWorker();
       idleWorker = this.workers.find((x) => !x.working);
     }
 
     idleWorker.working = true;
     this.delegateWorkerMessage(idleWorker.worker, message);
+  }
+
+  private async waitSomeWorker() {
+    await new Promise((resolve) => this.once('message', resolve));
+  }
+
+  async onIdle() {
+    while (this.workers.some(x => x.working)) {
+      await this.waitSomeWorker();
+    }
   }
 
   private createWorker(workerControl: WorkerControl<Worker>, workerIndex: number) {

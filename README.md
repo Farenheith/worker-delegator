@@ -41,6 +41,12 @@ Now, how to delegate the message? Like this:
 await delegator.delegate('my-message');
 ```
 
+After all delegations, you may need to wait that all pending tasks are finished. You can do this with this line of code:
+
+```TypeScript
+await delegator.onIdle();
+```
+
 That's it!
 
 The promise returned by delegate will resolve after the message is delegated, not when it is processed. That's how the delegation pace is controlled! awaiting this call, you can control the flow of your solution to wait a little in a processing, for example, when all the workers are busy!
