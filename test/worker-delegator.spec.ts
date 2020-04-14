@@ -59,6 +59,10 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 				}
 			});
 			(target as any).workers = workers = [];
+			workers.push({
+				worker: 'something something',
+				working: true,
+			});
 			let count = 1;
 		});
 
@@ -92,6 +96,7 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 		let waitSomeWorker: SinonStub;
 
 		beforeEach(() => {
+			(target as any).workers = [];
 			waitSomeWorker = stub(target, 'waitSomeWorker' as any);
 		});
 
