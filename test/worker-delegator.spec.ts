@@ -1,4 +1,4 @@
-import { describeClass, stub, expect, match } from "strict-unit-tests";
+import { describeClass, stub, expect, match, SinonStub } from "strict-unit-tests";
 import { WorkerDelegator } from "../src/worker-delegator";
 import { WorkerControl } from "../src/worker-control";
 
@@ -47,9 +47,7 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 
 		beforeEach(() => {
 			stub(target, 'delegateWorkerMessage' as any);
-			(target as any).workers = workers = [];
-			let count = 1;
-			stub(target, 'once').callsFake((_event, resolve) => {
+			stub(target, 'waitSomeWorker' as any).callsFake(async () => {
 				if (count === 0) {
 					workers.push({
 						worker: 'something something',
@@ -58,20 +56,66 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 				} else {
 					count--;
 				}
-				resolve();
 			});
+			(target as any).workers = workers = [];
+			let count = 1;
 		});
 
 		it('should wait until a worker is available before delegate', async () => {
 			const result = await target.delegate('some message');
 
-			expect(target['once']).to.have.callsLike(
-				['message', match.any],
-				['message', match.any],
-			);
+			expect(target['waitSomeWorker']).to.have.callsLike([], []);
 			expect(target['delegateWorkerMessage']).to.have.callsLike(
 				['something something', 'some message'],
 			);
+			expect(result).to.be.undefined;
+		});
+	});
+
+	describe('waitSomeWorker' as any, it => {
+		beforeEach(() => {
+			stub(target, 'once').callsFake((_event, resolve) => resolve());
+		});
+
+		it('should promisify once', async () => {
+			const result = await target['waitSomeWorker']();
+
+			expect(target['once']).to.have.callsLike(
+				['message', match.func],
+			);
+			expect(result).to.be.undefined;
+		});
+	});
+
+	describe('onIdle', () => {
+		let waitSomeWorker: SinonStub;
+
+		beforeEach(() => {
+			waitSomeWorker = stub(target, 'waitSomeWorker' as any);
+		});
+
+		it('should do nothing if there is no worker', async () => {
+			const result = await target.onIdle();
+
+			expect(target['waitSomeWorker']).to.have.callsLike();
+			expect(result).to.be.undefined;
+		});
+
+		it('should wait all workers to be idle', async () => {
+			target['workers'].push({
+				working: true,
+			} as any);
+			target['workers'].push({
+				working: true,
+			} as any);
+			waitSomeWorker.callsFake(() => {
+				const worker = target['workers'].find(x => x.working);
+				worker!.working = false;
+			});
+
+			const result = await target.onIdle();
+
+			expect(target['waitSomeWorker']).to.have.callsLike([], []);
 			expect(result).to.be.undefined;
 		});
 	});

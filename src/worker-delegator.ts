@@ -47,9 +47,11 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
   }
 
   async onIdle() {
-    while (this.workers.some(x => x.working)) {
-      await this.waitSomeWorker();
-    }
+		if (this.workers.length > 0) {
+			while (this.workers.some(x => x.working)) {
+				await this.waitSomeWorker();
+			}
+		}
   }
 
   private createWorker(workerControl: WorkerControl<Worker>, workerIndex: number) {
