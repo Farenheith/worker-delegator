@@ -21,7 +21,7 @@ export class WorkerThreadDelegator<WorkerMessage> extends WorkerDelegator<Worker
 		}, this.workerOptions.workerData);
 		const worker = new Worker(this.workerCode, options);
     worker.on('exit', this.getOnExit(workerControl, workerIndex));
-		worker.on('message', this.getOnMessage(workerControl, workerIndex));
+		worker.on('message', this.getOnMessage(workerControl));
 		return worker;
 	}
 

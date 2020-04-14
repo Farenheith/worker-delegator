@@ -1,6 +1,7 @@
 import { describeClass, stub, expect, match, SinonStub } from "strict-unit-tests";
 import { WorkerDelegator } from "../src/worker-delegator";
 import { WorkerControl } from "../src/worker-control";
+import { useFakeTimers, SinonFakeTimers } from 'sinon';
 
 class TestWorkerDelegator extends WorkerDelegator<unknown, unknown> {
 	protected newWorkerInstance(workerIndex: number, workerControl: WorkerControl<any>) {
@@ -148,4 +149,61 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 			});
 		});
 	});
-})
+
+	describe('getOnExit' as any, it => {
+		let clock: SinonFakeTimers;
+
+		beforeEach(() => {
+			stub(target, 'emit');
+			stub(target, 'createWorker' as any);
+			clock = useFakeTimers(new Date());
+		});
+
+		afterEach(() => {
+			clock.restore();
+		});
+
+		it('should return a function that emit "workerDied" event and create Worker again after the setted delay', async () => {
+			target['rebornDelay' as any] = 10000;
+			const workerControl: WorkerControl<any> = {
+				worker: undefined,
+				working: false,
+			};
+
+			const factory = target['getOnExit'](workerControl, 1);
+			const promisedResult = factory();
+
+			expect(target['emit']).to.have.callsLike(
+				['workerDied', 1],
+			);
+			expect(target['createWorker']).to.have.callsLike();
+			clock.tick(10000);
+			const result = await promisedResult;
+			expect(target['createWorker']).to.have.callsLike(
+				[workerControl, 1],
+			);
+			expect(result).to.be.undefined;
+		});
+	});
+
+	describe('getOnMessage' as any, it => {
+		beforeEach(() => {
+			stub(target, 'emit');
+		});
+
+		it('should return a function that emit "message" event', async () => {
+			const workerControl: WorkerControl<any> = {
+				worker: undefined,
+				working: false,
+			};
+
+			const factory = target['getOnMessage'](workerControl);
+			const result = factory('message value');
+
+			expect(target['emit']).to.have.callsLike(
+				['message', 'message value'],
+			);
+			expect(result).to.be.undefined;
+		});
+	});
+});
