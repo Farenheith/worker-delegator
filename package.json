@@ -3,6 +3,10 @@
   "version": "0.6.5",
   "description": "A lib to delegate tasks for workers on a controlled way",
   "main": "build/index.js",
+  "files": [
+    "build",
+    "*.js"
+  ],
   "scripts": {
     "test": "mocha --experimental-worker node_modules/base-project-config/setup.spec.js ./test/**/*.spec.ts",
     "lint": "run-lint",
