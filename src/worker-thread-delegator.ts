@@ -1,8 +1,8 @@
 import { Worker, WorkerOptions } from 'worker_threads';
+
+import { RELOAD_DELAY } from './constants';
 import { WorkerControl } from './worker-control';
 import { WorkerDelegator } from './worker-delegator';
-
-export const RELOAD_DELAY = 10000;
 
 export class WorkerThreadDelegator<WorkerMessage> extends WorkerDelegator<Worker, WorkerMessage> {
   constructor(

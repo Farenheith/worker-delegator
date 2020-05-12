@@ -1,2 +1,5 @@
-// export { WorkerThreadDelegator } from './worker-thread-delegator';
-// export { WorkerTaskDelegator } from './worker-task-delegator';
+export * from './constants';
+export * from './worker-thread-delegator';
+export * from './worker-task-delegator';
+export * from './get-task-delegator';
+export * from './get-thread-delegator';

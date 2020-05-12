@@ -1,7 +1,7 @@
 import { EventEmitter } from 'tsee';
-import delay from 'delay';
 import { WorkerControl } from './worker-control';
 import { WorkerEvents } from './worker-events';
+import delay from 'delay';
 
 export const RELOAD_DELAY = 10000;
 

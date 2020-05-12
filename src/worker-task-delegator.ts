@@ -1,7 +1,7 @@
+import { RELOAD_DELAY } from './constants';
 import { WorkerControl } from './worker-control';
 import { WorkerDelegator } from './worker-delegator';
 
-export const RELOAD_DELAY = 10000;
 export type Task<WorkerMessage> = (message: WorkerMessage, index: number) => PromiseLike<unknown>;
 export type Worker<WorkerMessage> = (message: WorkerMessage) => PromiseLike<unknown>;
 

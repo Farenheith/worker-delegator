@@ -1,81 +1,82 @@
-// import { expect } from 'strict-unit-tests';
-// import { stub } from 'strict-unit-tests';
-// import { describeClass } from 'strict-unit-tests';
-// import { WorkerThreadDelegator } from '../src/worker-thread-delegator';
-// import * as workerThreads from 'worker_threads';
+import * as workerThreads from 'worker_threads';
 
-// let target: WorkerThreadDelegator<any>;
+import { WorkerThreadDelegator } from '../src/worker-thread-delegator';
+import { describeClass } from 'strict-unit-tests';
+import { expect } from 'strict-unit-tests';
+import { stub } from 'strict-unit-tests';
 
-// function bootStrapper() {
-// 	return target = new WorkerThreadDelegator<any>(
-// 		3, 'worker-code', {
-// 			resourceLimits: 'resourceLimits value' as any,
-// 			workerData: {
-// 				info: 'my-worker-data',
-// 			},
-// 		},
-// 	);
-// }
+let target: WorkerThreadDelegator<any>;
 
-// describeClass(WorkerThreadDelegator, bootStrapper, describe => {
-// 	describe.static('constructor' as any, () => {
-// 		target = new WorkerThreadDelegator<any>(3, 'worker-code');
+function bootStrapper() {
+	return target = new WorkerThreadDelegator<any>(
+		3, 'worker-code', {
+			resourceLimits: 'resourceLimits value' as any,
+			workerData: {
+				info: 'my-worker-data',
+			},
+		},
+	);
+}
 
-// 		expect(target['workerOptions']).to.be.eql({});
-// 	});
+describeClass(WorkerThreadDelegator, bootStrapper, describe => {
+	describe.static('constructor' as any, () => {
+		target = new WorkerThreadDelegator<any>(3, 'worker-code');
 
-// 	describe('delegateWorkerMessage' as any, it => {
-// 		it('should run worker function', () => {
-// 			const worker = {
-// 				postMessage: stub(),
-// 			};
-// 			const message = 'message value';
+		expect(target['workerOptions']).to.be.eql({});
+	});
 
-// 			const result = target['delegateWorkerMessage'](worker as any, message);
+	describe('delegateWorkerMessage' as any, it => {
+		it('should run worker function', () => {
+			const worker = {
+				postMessage: stub(),
+			};
+			const message = 'message value';
 
-// 			expect(worker.postMessage).to.have.callsLike([message]);
-// 			expect(result).to.be.undefined;
-// 		});
-// 	});
+			const result = target['delegateWorkerMessage'](worker as any, message);
 
-// 	describe('newWorkerInstance' as any, it => {
-// 		let worker: workerThreads.Worker;
+			expect(worker.postMessage).to.have.callsLike([message]);
+			expect(result).to.be.undefined;
+		});
+	});
 
-// 		beforeEach(() => {
-// 			stub(target, 'getOnMessage' as any).returns('getOnMessage result');
-// 			stub(target, 'getOnExit' as any).returns('getOnExit result');
-// 			worker = {
-// 				on: stub(),
-// 			} as any;
-// 			stub(workerThreads, 'Worker').returns(worker);
-// 		});
+	describe('newWorkerInstance' as any, it => {
+		let worker: workerThreads.Worker;
 
-// 		it('should return a function that runs the workerCode and calls onMessage event', async () => {
-// 			const workerControl = 'workerControl value';
-// 			const workerIndex = 1;
+		beforeEach(() => {
+			stub(target, 'getOnMessage' as any).returns('getOnMessage result');
+			stub(target, 'getOnExit' as any).returns('getOnExit result');
+			worker = {
+				on: stub(),
+			} as any;
+			stub(workerThreads, 'Worker').returns(worker);
+		});
 
-// 			const result = target['newWorkerInstance'](workerIndex, workerControl as any);
+		it('should return a function that runs the workerCode and calls onMessage event', async () => {
+			const workerControl = 'workerControl value';
+			const workerIndex = 1;
 
-// 			expect(workerThreads.Worker).to.have.callsLike(
-// 				['worker-code', {
-// 					resourceLimits: 'resourceLimits value',
-// 					workerData: {
-// 						info: 'my-worker-data',
-// 						workerIndex: 1,
-// 					}
-// 				}]
-// 			);
-// 			expect(target['getOnExit']).to.have.callsLike(
-// 				[workerControl, workerIndex],
-// 			);
-// 			expect(target['getOnMessage']).to.have.callsLike(
-// 				[workerControl],
-// 			);
-// 			expect(worker.on).to.have.callsLike(
-// 				['exit', 'getOnExit result'],
-// 				['message', 'getOnMessage result'],
-// 			)
-// 			expect(result).to.be.eq(worker);
-// 		});
-// 	});
-// });
+			const result = target['newWorkerInstance'](workerIndex, workerControl as any);
+
+			expect(workerThreads.Worker).to.have.callsLike(
+				['worker-code', {
+					resourceLimits: 'resourceLimits value',
+					workerData: {
+						info: 'my-worker-data',
+						workerIndex: 1,
+					}
+				}]
+			);
+			expect(target['getOnExit']).to.have.callsLike(
+				[workerControl, workerIndex],
+			);
+			expect(target['getOnMessage']).to.have.callsLike(
+				[workerControl],
+			);
+			expect(worker.on).to.have.callsLike(
+				['exit', 'getOnExit result'],
+				['message', 'getOnMessage result'],
+			)
+			expect(result).to.be.eq(worker);
+		});
+	});
+});

@@ -1,7 +1,8 @@
-import { expect } from 'strict-unit-tests';
-import { stub, SinonStub } from 'strict-unit-tests';
+import { SinonStub, stub } from 'strict-unit-tests';
+
 import { WorkerTaskDelegator } from './../src/worker-task-delegator';
 import { describeClass } from 'strict-unit-tests';
+import { expect } from 'strict-unit-tests';
 
 let target: WorkerTaskDelegator<any>;
 let workerCode: any;
