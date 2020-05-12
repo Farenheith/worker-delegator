@@ -1,6 +1,6 @@
 {
   "name": "worker-delegator",
-  "version": "0.6.5",
+  "version": "0.7.0",
   "description": "A lib to delegate tasks for workers on a controlled way",
   "main": "build/index.js",
   "files": [
