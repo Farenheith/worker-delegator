@@ -1,9 +1,8 @@
 import { EventEmitter } from 'tsee';
+import { RELOAD_DELAY } from './constants';
 import { WorkerControl } from './worker-control';
 import { WorkerEvents } from './worker-events';
 import delay from 'delay';
-
-export const RELOAD_DELAY = 10000;
 
 export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitter<WorkerEvents> {
   private readonly workers: Array<WorkerControl<Worker>> = [];

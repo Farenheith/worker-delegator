@@ -4,8 +4,7 @@
   "description": "A lib to delegate tasks for workers on a controlled way",
   "main": "build/index.js",
   "files": [
-    "build",
-    "*.js"
+    "build"
   ],
   "scripts": {
     "test": "mocha --experimental-worker node_modules/base-project-config/setup.spec.js ./test/**/*.spec.ts",
