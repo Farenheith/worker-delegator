@@ -1,10 +1,11 @@
-import { EventEmitter } from 'tsee';
+import { EventEmitter } from 'events';
 import { RELOAD_DELAY } from './constants';
 import { WorkerControl } from './worker-control';
 import { WorkerEvents } from './worker-events';
 import delay from 'delay';
+import TypedEventEmitter from 'typed-emitter';
 
-export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitter<WorkerEvents> {
+export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitter implements TypedEventEmitter<WorkerEvents> {
   private readonly workers: Array<WorkerControl<Worker>> = [];
 
   constructor(
