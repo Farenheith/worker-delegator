@@ -9,8 +9,8 @@
   "scripts": {
     "test": "mocha --experimental-worker node_modules/base-project-config/setup.spec.js ./test/**/*.spec.ts",
     "lint": "run-lint",
-    "prebuild": "run-pre-build",
-    "build": "run-build",
+    "prebuild": "del-cli ./build",
+    "build": "nest build",
     "test:coverage": "run-test-coverage",
     "test:coverage:lcovonly": "run-test-lcov",
     "prepublish": "npm run build"
@@ -18,6 +18,8 @@
   "author": "Farenheith",
   "license": "MIT",
   "devDependencies": {
+    "@nestjs/cli": "^10.1.17",
+    "del-cli": "^5.1.0",
     "strict-unit-tests": "^2.0.8"
   },
   "dependencies": {

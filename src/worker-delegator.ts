@@ -7,6 +7,7 @@ import TypedEventEmitter from 'typed-emitter';
 
 export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitter implements TypedEventEmitter<WorkerEvents> {
   private readonly workers: Array<WorkerControl<Worker>> = [];
+	private waiting: Promise<unknown> | unknown;
 
   constructor(
 		private readonly concurrency: number,
@@ -43,7 +44,11 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
   }
 
   private async waitSomeWorker() {
-    await new Promise((resolve) => this.once('message', resolve));
+		if (!this.waiting) {
+    	this.waiting = await new Promise((resolve) => this.once('message', resolve))
+				.then(() => this.waiting = undefined);
+		}
+		return this.waiting;
   }
 
   async onIdle() {

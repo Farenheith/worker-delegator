@@ -79,7 +79,7 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 
 	describe('waitSomeWorker' as any, it => {
 		beforeEach(() => {
-			stub(target, 'once').callsFake((_event, resolve) => resolve());
+			stub(target, 'once').callsFake((_event, resolve: any) => resolve());
 		});
 
 		it('should promisify once', async () => {
@@ -169,7 +169,7 @@ describeClass(TestWorkerDelegator, bootStrapper, describe => {
 		});
 
 		it('should return a function that emit "workerDied" event and create Worker again after the setted delay', async () => {
-			target['rebornDelay' as any] = 10000;
+			(target as any)['rebornDelay'] = 10000;
 			const workerControl: WorkerControl<any> = {
 				worker: undefined,
 				working: false,
