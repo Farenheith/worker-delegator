@@ -24,6 +24,7 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
         const workerControl = this.createWorker({} as WorkerControl<Worker>, i);
         this.workers.push(workerControl);
       }
+			this.setMaxListeners(this.concurrency + 10);
 
       return true;
     }
