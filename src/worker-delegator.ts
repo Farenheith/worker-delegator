@@ -44,9 +44,9 @@ export abstract class WorkerDelegator<Worker, WorkerMessage> extends EventEmitte
     this.delegateWorkerMessage(idleWorker.worker, message);
   }
 
-  private async waitSomeWorker() {
+  private waitSomeWorker() {
 		if (!this.waiting) {
-    	this.waiting = await new Promise((resolve) => this.once('message', resolve))
+    	this.waiting = new Promise((resolve) => this.once('message', resolve))
 				.then(() => this.waiting = undefined);
 		}
 		return this.waiting;
